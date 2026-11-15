@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="kk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Даниярдың 40 жас мерейтойы & Алмардың сүндет тойы</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FDFBF7;
+            color: #2C2A29;
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 50%, #F3E5AB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-bg {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+        }
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-[#FDFBF7] text-[#333333]">
+
+    <!-- Audio Player -->
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Music Toggle Button -->
+    <button id="music-toggle" onclick="toggleMusic()" class="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 animate-bounce cursor-pointer border border-white/45 hidden">
+        <i id="music-icon" class="fa-solid fa-music text-xl"></i>
+    </button>
+
+    <!-- Welcome Modal / Cover Screen -->
+    <div id="welcome-screen" class="fixed inset-0 z-50 bg-[#FDFBF7] flex flex-col items-center justify-center p-6 text-center transition-opacity duration-700">
+        <div class="max-w-md w-full p-8 rounded-3xl gold-border bg-white shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#F7F2E7] rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-[#F7F2E7] rounded-full blur-2xl"></div>
+            
+            <p class="uppercase tracking-[0.25em] text-xs text-[#8C7A5B] mb-3 font-semibold">Құрметті қонақтар</p>
+            <h1 class="serif-font text-3xl md:text-4xl font-bold text-[#2C2A29] mb-4">Тойға шақыру</h1>
+            <p class="text-sm text-[#666666] mb-8 leading-relaxed">Салтанатты ақ дастарханымыздың қадірлі қонағы болуға қош келдіңіздер!</p>
+            
+            <button onclick="openInvitation()" class="w-full py-4 px-8 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-white rounded-2xl font-medium tracking-widest uppercase text-sm shadow-lg hover:opacity-95 transition-all transform active:scale-95 cursor-pointer">
+                Шақыруды ашу <i class="fa-solid fa-envelope-open ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000">
+        
+        <!-- Hero Section -->
+        <header class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 py-20 bg-gradient-to-b from-[#F7F2E7] via-[#FDFBF7] to-[#FDFBF7]">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
+            
+            <div class="relative z-10 max-w-xl mx-auto w-full card-bg shadow-2xl rounded-3xl overflow-hidden gold-border p-3 md:p-6">
+                <!-- Invitation Image (4:3 Aspect Ratio) -->
+                <div class="w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-inner mb-6">
+                    <img src="invitation.jpg" alt="Тойға шақыру" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                </div>
+
+                <div class="px-4 pb-6">
+                    <span class="text-xs uppercase tracking-[0.3em] text-[#8C7A5B] block mb-3 font-semibold">Құрметті қонақтар!</span>
+                    
+                    <h2 class="serif-font text-2xl md:text-3xl font-bold text-[#2C2A29] mb-6 leading-relaxed">
+                        Сіздерді <span class="gold-gradient">Даниярдың</span> 40 жас мерейтойы және <span class="gold-gradient">Алмардың</span> сүндет тойына арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!
+                    </h2>
+
+                    <!-- Той иелері -->
+                    <div class="mb-6 py-2 px-4 inline-block bg-[#F7F2E7] rounded-full border border-[#E6C687]/55">
+                        <span class="text-xs uppercase tracking-widest text-[#8C7A5B] font-semibold">Той иелері:</span> 
+                        <span class="serif-font font-bold text-[#2C2A29] text-lg ml-1">Данияр – Сания</span>
+                    </div>
+                    
+                    <div class="w-20 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-6"></div>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-[#555555] text-base font-medium bg-[#F7F2E7]/60 py-3 px-6 rounded-2xl">
+                        <div><i class="fa-solid fa-calendar-days text-[#D4AF37] mr-2"></i> 06 Желтоқсан 2026</div>
+                        <div class="hidden sm:block text-[#D4AF37]">•</div>
+                        <div><i class="fa-solid fa-clock text-[#D4AF37] mr-2"></i> 12:00</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Countdown Section -->
+        <section class="py-16 px-6 bg-[#F7F2E7] text-center">
+            <div class="max-w-xl mx-auto">
+                <h3 class="serif-font text-2xl md:text-3xl font-bold text-[#2C2A29] mb-8">Тойға дейін қалды</h3>
+                <div class="grid grid-cols-4 gap-3 md:gap-6">
+                    <div class="bg-white p-4 rounded-2xl shadow-md gold-border">
+                        <span id="days" class="block serif-font text-3xl md:text-4xl font-bold text-[#D4AF37]">00</span>
+                        <span class="text-xs uppercase tracking-wider text-[#777777]">Күн</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-md gold-border">
+                        <span id="hours" class="block serif-font text-3xl md:text-4xl font-bold text-[#D4AF37]">00</span>
+                        <span class="text-xs uppercase tracking-wider text-[#777777]">Сағат</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-md gold-border">
+                        <span id="minutes" class="block serif-font text-3xl md:text-4xl font-bold text-[#D4AF37]">00</span>
+                        <span class="text-xs uppercase tracking-wider text-[#777777]">Минут</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl shadow-md gold-border">
+                        <span id="seconds" class="block serif-font text-3xl md:text-4xl font-bold text-[#D4AF37]">00</span>
+                        <span class="text-xs uppercase tracking-wider text-[#777777]">Секунд</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="py-20 px-6 bg-[#FDFBF7] text-center">
+            <div class="max-w-xl mx-auto card-bg p-8 md:p-12 rounded-3xl shadow-xl gold-border">
+                <div class="w-16 h-16 bg-[#F7F2E7] text-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6 text-2xl shadow-inner">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="serif-font text-2xl md:text-3xl font-bold text-[#2C2A29] mb-4">Өтетін орны</h3>
+                <p class="text-xl font-semibold text-[#8C7A5B] mb-2">«Даулет 2» мейрамханасы</p>
+                <p class="text-[#666666] mb-8">Жамбыл облысы, Шу қаласы</p>
+                
+                <a href="https://2gis.kz" target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-[#2C2A29] text-white rounded-2xl font-medium tracking-wide shadow-lg hover:bg-[#D4AF37] transition-all">
+                    <i class="fa-solid fa-map-location-dot mr-2"></i> 2GIS картасынан көру
+                </a>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="py-20 px-6 bg-[#FDFBF7] text-center">
+            <div class="max-w-xl mx-auto card-bg p-8 md:p-12 rounded-3xl shadow-xl gold-border">
+                <h3 class="serif-font text-2xl md:text-3xl font-bold text-[#2C2A29] mb-3">Қатысуыңызды растаңыз</h3>
+                <p class="text-sm text-[#666666] mb-8">Тойға келетініңізді хабарлап, бізді қуантыңыз!</p>
+                
+                <form id="rsvp-form" onsubmit="handleRSVP(event)" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-[#8C7A5B] mb-2">Аты-жөніңіз:</label>
+                        <input type="text" id="guest-name" required class="w-full px-4 py-3 rounded-xl border border-[#E6C687]/60 focus:outline-none focus:border-[#D4AF37] bg-[#FDFBF7]" placeholder="Толық атыңызды жазыңыз">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-[#8C7A5B] mb-2">Келетініңіз:</label>
+                        <select id="guest-status" class="w-full px-4 py-3 rounded-xl border border-[#E6C687]/60 focus:outline-none focus:border-[#D4AF37] bg-[#FDFBF7]">
+                            <option value="Иә, міндетті түрде келемін">Иә, міндетті түрде келемін 🎉</option>
+                            <option value="Өкінішке орай, келе алмаймын">Өкінішке орай, келе алмаймын 😔</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-white rounded-2xl font-medium tracking-widest uppercase text-sm shadow-lg hover:opacity-95 transition-all cursor-pointer">
+                        Жіберу (WhatsApp-қа жолдау)
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Share & Footer Section -->
+        <section class="py-16 px-6 bg-[#F7F2E7] text-center border-t border-[#E6C687]/30">
+            <div class="max-w-xl mx-auto">
+                <h3 class="serif-font text-2xl md:text-3xl font-bold text-[#2C2A29] mb-6">Шақыруды бөлісу</h3>
+                
+                <a href="https://api.whatsapp.com/send?text=Даниярдың%2040%20жас%20мерейтойы%20және%20Алмардың%20сүндет%20тойына%20шақырамыз!%20Толығырақ:" target="_blank" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-[#1B4332] text-white rounded-full font-bold tracking-wider shadow-xl hover:bg-[#133124] transition-all cursor-pointer border border-[#D4AF37]/50 mb-10">
+                    <i class="fa-brands fa-whatsapp text-2xl mr-3 text-[#25D366]"></i> WHATSAPP АРҚЫЛЫ БӨЛІСУ
+                </a>
+
+                <div class="text-[#555555] space-y-2">
+                    <p class="text-sm font-medium">Той иелері: Данияр – Сания</p>
+                    <p class="serif-font italic text-lg text-[#8C7A5B]">Баршаңызға қуаныш тілейміз!</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script JavaScript -->
+    <script>
+        const music = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.className = "fa-solid fa-music text-xl";
+                isPlaying = false;
+            } else {
+                music.play().then(() => {
+                    musicIcon.className = "fa-solid fa-volume-high text-xl";
+                    isPlaying = true;
+                }).catch(e => console.log("Audio autoplay prevented"));
+            }
+        }
+
+        function openInvitation() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+            const musicToggleBtn = document.getElementById('music-toggle');
+            
+            welcomeScreen.style.opacity = '0';
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                mainContent.style.opacity = '1';
+                musicToggleBtn.classList.remove('hidden');
+                music.play().then(() => {
+                    musicIcon.className = "fa-solid fa-volume-high text-xl";
+                    isPlaying = true;
+                }).catch(e => console.log("Audio autoplay prevented"));
+            }, 700);
+        }
+
+        const weddingDate = new Date("December 6, 2026 12:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function handleRSVP(event) {
+            event.preventDefault();
+            const name = document.getElementById('guest-name').value;
+            const status = document.getElementById('guest-status').value;
+            
+            const phoneNumber = "87766402837"; 
+
+            const text = `Сәлем! Мен ${name}. Тойға жауабым: ${status}`;
+            const encodedText = encodeURIComponent(text);
+            
+            window.open(`https://api.whatsapp.com/send?phone=7${phoneNumber.slice(1)}&text=${encodedText}`, '_blank');
+        }
+    </script>
+</body>
+</html>
